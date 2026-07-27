@@ -8,7 +8,7 @@ import { COMPANY, TEAM } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contact Us | Get a Commercial Insurance Quote",
   description:
-    "Contact Linwood Guardian Risk Management for a free commercial insurance consultation. Call (716) 710-8910 or visit us at 759 Dick Rd, Cheektowaga, NY 14225. Serving Buffalo and Western New York.",
+    "Contact Linwood Guardian Risk Management for a free commercial insurance consultation. Call (716) 710-8910 or visit us at 759 Dick Rd, Buffalo, NY 14225. Serving Western New York.",
 };
 
 const localBusinessSchema = {
@@ -55,7 +55,7 @@ export default function ContactPage() {
               Contact Linwood Guardian Risk Management
             </h1>
             <p className="text-lg text-white/80 leading-relaxed animate-hero-body">
-              Our principals bring over 65 years of combined experience and
+              Our principals bring over 35 years of combined experience and
               offer customized policy options for regional and national clients.
               Reach out today for a free consultation.
             </p>

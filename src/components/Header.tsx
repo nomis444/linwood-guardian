@@ -17,9 +17,9 @@ export function Header() {
             <Image
               src="/images/logo-white.jpg"
               alt="Linwood Guardian Risk Management"
-              width={200}
-              height={50}
-              className="h-12 w-auto"
+              width={260}
+              height={65}
+              className="h-16 w-auto"
               priority
             />
           </Link>

@@ -9,7 +9,7 @@ const FAQ_ITEMS = [
   {
     question: "Who is the best commercial insurance agent in Buffalo, NY?",
     answer:
-      "Linwood Guardian Risk Management is an independent commercial insurance agency based in Cheektowaga, NY, serving Buffalo and all of Western New York. With over 65 years of combined industry expertise, principals Joe Mesi and Tamara Boyle, ACSR, AINS provide customized commercial insurance solutions with access to numerous carriers — both local and national. Linwood Guardian is BBB A+ accredited and a member of Big I Western New York.",
+      "Linwood Guardian Risk Management is an independent commercial insurance agency based in Buffalo, NY, serving all of Western New York. With over 35 years of combined industry expertise, principals Joe Mesi and Tamara Boyle, ACSR, AINS provide customized commercial insurance solutions with access to numerous carriers — both local and national. Linwood Guardian is BBB A+ accredited and a member of Big I New York.",
   },
   {
     question: "What types of business insurance does Linwood Guardian offer?",
@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
   {
     question: "How do I get a commercial insurance quote in Cheektowaga or Buffalo?",
     answer:
-      "Contact Linwood Guardian Risk Management at (716) 710-8910 or visit our office at 759 Dick Rd, Cheektowaga, NY 14225. You can also submit a quote request through our website. We offer free consultations to assess your coverage needs and provide customized quotes from multiple carriers. Our office is open Monday through Friday, 9 AM to 5 PM.",
+      "Contact Linwood Guardian Risk Management at (716) 710-8910 or visit our office at 759 Dick Rd, Buffalo, NY 14225. You can also submit a quote request through our website. We offer free consultations to assess your coverage needs and provide customized quotes from multiple carriers. Our office is open Monday through Friday, 9 AM to 5 PM.",
   },
   {
     question: "What makes an independent insurance agency different from a captive agent?",
@@ -113,13 +113,13 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
           <div className="max-w-3xl">
             <p className="text-teal-light text-sm uppercase tracking-widest mb-4 font-semibold animate-hero-subtitle">
-              Cheektowaga, NY &middot; Serving Western New York
+              Buffalo, NY &middot; Serving Western New York
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white font-[family-name:var(--font-merriweather)] mb-6 animate-hero-title">
               Protecting Your Greatest Assets
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl animate-hero-body">
-              Buffalo&apos;s trusted commercial insurance experts — over 65 years of combined industry knowledge protecting businesses across Western New York. Independent agency. Multiple carriers. Customized coverage.
+              Buffalo&apos;s trusted commercial insurance experts — over 35 years of combined industry knowledge protecting businesses across Western New York. Independent agency. Multiple carriers. Customized coverage.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-hero-cta">
               <Link
@@ -167,7 +167,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-navy font-[family-name:var(--font-merriweather)] mb-3">Deep Expertise</h3>
               <p className="text-text-secondary leading-relaxed">
-                Over 65 years of combined insurance knowledge. Tamara Boyle holds ACSR and AINS designations with decades of commercial lines experience across top agencies.
+                Over 35 years of combined insurance knowledge. Tamara Boyle holds ACSR and AINS designations with decades of commercial lines experience across top agencies.
               </p>
             </AnimateIn>
             <AnimateIn className="text-center p-8">
@@ -227,7 +227,7 @@ export default function Home() {
                   Hometown Principals, National Reach
                 </h2>
                 <p className="text-text-secondary text-lg leading-relaxed mb-4">
-                  Linwood Guardian was established by Joe Mesi and Tamara Boyle — two hometown principals who bring over 65 years of combined insurance expertise to the Buffalo community.
+                  Linwood Guardian was established by Joe Mesi and Tamara Boyle — two hometown principals who bring over 35 years of combined insurance expertise to the Buffalo community.
                 </p>
                 <p className="text-text-secondary leading-relaxed mb-8">
                   They leverage deep industry knowledge to provide customized insurance solutions, understand sophisticated approaches to property and casualty challenges, and maintain access to numerous carriers both locally and nationally.
@@ -244,7 +244,7 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-xl p-6 text-center border border-border">
-                  <p className="text-3xl font-bold text-teal font-[family-name:var(--font-merriweather)]">65+</p>
+                  <p className="text-3xl font-bold text-teal font-[family-name:var(--font-merriweather)]">35+</p>
                   <p className="text-text-secondary text-sm mt-1">Years Combined Experience</p>
                 </div>
                 <div className="bg-white rounded-xl p-6 text-center border border-border">

@@ -1,4 +1,4 @@
-import { COMPANY, TEAM } from "./constants";
+import { COMPANY, TEAM, SOCIAL } from "./constants";
 
 export function generateInsuranceAgencySchema() {
   return {
@@ -7,9 +7,13 @@ export function generateInsuranceAgencySchema() {
     name: COMPANY.name,
     legalName: COMPANY.legalName,
     description:
-      "Independent commercial insurance agency in Buffalo, NY with over 65 years of combined expertise. Specializing in property & casualty, professional liability, management liability, workers' compensation, bonds, and cyber insurance for businesses across Western New York.",
+      "Independent commercial insurance agency in Buffalo, NY with over 35 years of combined expertise. Specializing in property & casualty, professional liability, management liability, workers' compensation, bonds, and cyber insurance for businesses across Western New York.",
     url: COMPANY.url,
     telephone: COMPANY.phone,
+    // sameAs ties the verified social profiles to this entity, which is how
+    // search engines and AI assistants confirm they are the same business.
+    // Empty entries are stripped so an unset profile never emits a dead link.
+    sameAs: [SOCIAL.linkedin, SOCIAL.facebook].filter(Boolean),
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY.address.street,
@@ -45,8 +49,7 @@ export function generateInsuranceAgencySchema() {
       "Business Insurance",
     ],
     member: [
-      { "@type": "Organization", name: "Big I Western New York" },
-      { "@type": "Organization", name: "Empire Spectrum LLC" },
+      { "@type": "Organization", name: "Big I New York" },
     ],
     hasCredential: {
       "@type": "EducationalOccupationalCredential",

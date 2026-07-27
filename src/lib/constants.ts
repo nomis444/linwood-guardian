@@ -5,14 +5,14 @@ export const COMPANY = {
   phone: "(716) 710-8910",
   address: {
     street: "759 Dick Rd",
-    city: "Cheektowaga",
+    city: "Buffalo",
     state: "NY",
     zip: "14225",
-    full: "759 Dick Rd, Cheektowaga, NY 14225",
+    full: "759 Dick Rd, Buffalo, NY 14225",
   },
   hours: "Monday – Friday, 9:00 AM – 5:00 PM",
   founded: "2022",
-  experience: "65+",
+  experience: "35+",
   url: "https://linwoodguardian.com",
 } as const;
 
@@ -29,17 +29,42 @@ export const TEAM = {
     name: "Joe Mesi",
     credentials: "",
     title: "Principal",
-    phone: "(716) 626-3355",
+    phone: "(716) 710-8910",
     email: "JoeMesi@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/joe-mesi-6b285966/",
   },
 } as const;
 
-export const MESI_AGENCY = {
-  name: "Mesi Agency Inc.",
-  phone: "(716) 626-3355",
-  relationship: "Sister agency handling personal insurance lines",
+export const PERSONAL_LINES = {
+  name: "Linwood Guardian Risk Management",
+  phone: "(716) 710-8910",
 } as const;
+
+export const SOCIAL = {
+  // Leave a value empty and it simply will not render anywhere on the site.
+  linkedin: "https://www.linkedin.com/in/tamaraboyle1",
+  facebook: "", // AWAITING URL from Tamara (requested 2026-07-27)
+} as const;
+
+export const LICENSING = {
+  homeState: "New York",
+  // Linwood Guardian is licensed beyond NYS, but the specific states have not
+  // been provided yet (asked Tamara 2026-07-27). Do NOT populate this from
+  // assumption — a licensure claim for a state they are not admitted in is a
+  // regulatory problem, not a copy problem.
+  additionalStates: [] as readonly string[],
+};
+
+/** "Licensed in New York State" — plus any additional states, once confirmed. */
+export function licensingStatement(): string {
+  const { homeState, additionalStates } = LICENSING;
+  if (additionalStates.length === 0) return `Licensed in ${homeState} State`;
+  if (additionalStates.length === 1)
+    return `Licensed in ${homeState} State and ${additionalStates[0]}`;
+  const last = additionalStates[additionalStates.length - 1];
+  const rest = additionalStates.slice(0, -1).join(", ");
+  return `Licensed in ${homeState} State, ${rest}, and ${last}`;
+}
 
 export const SERVICE_AREAS = [
   "Buffalo",

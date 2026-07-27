@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AnimateIn } from "@/components/AnimateIn";
-import { MESI_AGENCY } from "@/lib/constants";
+import { PERSONAL_LINES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Personal Insurance",
   description:
-    "Personal insurance solutions through our partners at Mesi Agency — home, auto, life, and recreational vehicle coverage. Serving Cheektowaga and Western New York for over three decades.",
+    "Personal insurance solutions from Linwood Guardian Risk Management — home, auto, pet, and recreational vehicle coverage. Serving Buffalo and Western New York for over three decades.",
 };
 
 const COVERAGE_TYPES = [
@@ -30,11 +30,15 @@ const COVERAGE_TYPES = [
     ),
   },
   {
-    title: "Life Insurance",
-    description: "Term and whole life policies to protect your family's financial future. Tailored to your stage of life and needs.",
+    title: "Pet Insurance",
+    description: "Coverage for your furry family members — accident, illness, and wellness plans from top-rated providers.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21s-6-4.35-6-10A6 6 0 0112 5a6 6 0 016 6c0 5.65-6 10-6 10z" />
+        <circle cx="9" cy="9" r="1" fill="currentColor" />
+        <circle cx="15" cy="9" r="1" fill="currentColor" />
+        <circle cx="7" cy="5" r="1.5" fill="currentColor" />
+        <circle cx="17" cy="5" r="1.5" fill="currentColor" />
       </svg>
     ),
   },
@@ -94,9 +98,8 @@ export default function PersonalInsurancePage() {
               Insurance That Steps Up When Life Happens
             </h1>
             <p className="text-lg text-white/80 leading-relaxed animate-hero-body">
-              Personal insurance for individuals and families in Cheektowaga and
-              Western New York, delivered through our partnership with{" "}
-              {MESI_AGENCY.name} — experts in personal lines coverage for over
+              Personal insurance for individuals and families in Buffalo and
+              Western New York — experts in personal lines coverage for over
               three decades.
             </p>
           </div>
@@ -111,7 +114,7 @@ export default function PersonalInsurancePage() {
               Personal Coverage Options
             </h2>
             <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-              Our partners at {MESI_AGENCY.name} are experts at finding the
+              {PERSONAL_LINES.name} experts will find the
               correct solution for your personal insurance policies.
             </p>
           </AnimateIn>
@@ -135,7 +138,7 @@ export default function PersonalInsurancePage() {
         </div>
       </section>
 
-      {/* Why Mesi Agency */}
+      {/* Why Choose Us */}
       <section className="py-20 md:py-28 bg-sky">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimateIn className="max-w-3xl mx-auto">
@@ -154,16 +157,16 @@ export default function PersonalInsurancePage() {
             </ul>
             <div className="mt-10 text-center">
               <p className="text-text-secondary mb-4">
-                For personal insurance inquiries, contact {MESI_AGENCY.name}:
+                For personal insurance inquiries, contact {PERSONAL_LINES.name}:
               </p>
               <a
-                href={`tel:${MESI_AGENCY.phone.replace(/\D/g, "")}`}
+                href={`tel:${PERSONAL_LINES.phone.replace(/\D/g, "")}`}
                 className="inline-flex items-center gap-2 text-teal font-semibold text-lg hover:underline"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                {MESI_AGENCY.phone}
+                {PERSONAL_LINES.phone}
               </a>
             </div>
           </AnimateIn>

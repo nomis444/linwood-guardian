@@ -72,6 +72,16 @@ const PROFESSIONS = [
       "Medical malpractice insurance covers healthcare providers against claims of diagnostic errors, treatment mistakes, surgical complications, and failure to obtain informed consent. New York has specific requirements for physicians and healthcare facilities.",
   },
   {
+    name: "Contractors",
+    description:
+      "General contractors, specialty trades, and construction managers face claims from design-build errors, project delays, cost overruns, and failure to meet contractual specifications. Professional liability for contractors covers these service delivery risks beyond standard general liability.",
+  },
+  {
+    name: "Manufacturing",
+    description:
+      "Manufacturers providing design, engineering, or consulting services face professional liability exposure from product design errors, specification mistakes, and failure to meet industry standards. Coverage protects against claims alleging professional negligence in the design or specification process.",
+  },
+  {
     name: "Beauty & Personal Care Services",
     description:
       "Cosmetologists, estheticians, massage therapists, and salon owners face claims from allergic reactions, chemical burns, and injuries during treatments. Professional liability for beauty professionals covers these service-related risks.",

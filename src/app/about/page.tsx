@@ -8,7 +8,7 @@ import { TEAM } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet the team behind Linwood Guardian Risk Management — Joe Mesi and Tamara Boyle, ACSR, AINS. Over 65 years of combined commercial insurance expertise serving Buffalo and Western New York.",
+    "Meet the team behind Linwood Guardian Risk Management — Joe Mesi and Tamara Boyle, ACSR, AINS. Over 35 years of combined commercial insurance expertise serving Buffalo and Western New York.",
 };
 
 export default function AboutPage() {
@@ -27,7 +27,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-lg text-white/80 leading-relaxed animate-hero-body">
               Linwood Guardian Risk Management was established by hometown
-              principals who collectively bring over 65 years of insurance
+              principals who collectively bring over 35 years of insurance
               expertise to the Buffalo community. We leverage deep industry
               knowledge to provide customized insurance solutions for businesses
               across Western New York.
@@ -99,7 +99,7 @@ export default function AboutPage() {
                 phone={TEAM.tamara.phone}
                 email={TEAM.tamara.email}
                 linkedin={TEAM.tamara.linkedin}
-                bio="Tamara Boyle brings deep commercial lines expertise earned across Western New York's top insurance agencies, including C.N. Maranto Agency, Tompkins Insurance, Scott Danahy Naylon, and The Evans Agency. She holds both the Accredited Customer Service Representative (ACSR) and Associate in Insurance (AINS) designations — credentials that reflect advanced knowledge of commercial coverage, underwriting, and risk assessment. Tamara specializes in finding the right coverage for complex commercial accounts."
+                bio="Tamara Boyle brings deep commercial lines expertise earned across Western New York's top insurance agencies, including Tompkins Insurance, Scott Danahy Naylon, and The Evans Agency. She holds both the Accredited Customer Service Representative (ACSR) and Associate in Insurance (AINS) designations — credentials that reflect advanced knowledge of commercial coverage, underwriting, and risk assessment. Tamara specializes in finding the right coverage for complex commercial accounts."
               />
             </AnimateIn>
           </div>
@@ -134,19 +134,11 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="bg-white rounded-xl border border-border p-6">
-                <h3 className="font-bold text-navy mb-2">Big I Western New York</h3>
+                <h3 className="font-bold text-navy mb-2">Big I New York</h3>
                 <p className="text-text-secondary text-sm leading-relaxed">
-                  Member of the Independent Insurance Agents &amp; Brokers
-                  association, the nation&apos;s oldest and largest trade
+                  Member of the Independent Insurance Agents &amp; Brokers of
+                  New York, the state&apos;s oldest and largest trade
                   organization for independent insurance agents.
-                </p>
-              </div>
-              <div className="bg-white rounded-xl border border-border p-6">
-                <h3 className="font-bold text-navy mb-2">Empire Spectrum LLC</h3>
-                <p className="text-text-secondary text-sm leading-relaxed">
-                  Member of the Empire Spectrum independent agent network,
-                  providing expanded carrier access and shared resources for
-                  agencies across New York State.
                 </p>
               </div>
             </div>
@@ -162,8 +154,8 @@ export default function AboutPage() {
               Serving Western New York and Beyond
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed mb-8">
-              Based in Cheektowaga at 759 Dick Rd, Linwood Guardian serves
-              businesses throughout Buffalo, Amherst, Tonawanda, West Seneca,
+              Based in Buffalo at 759 Dick Rd, Linwood Guardian serves
+              businesses throughout Cheektowaga, Amherst, Tonawanda, West Seneca,
               Orchard Park, Lancaster, Depew, Hamburg, Williamsville, and all of
               Western New York. We also serve clients throughout New York State.
             </p>
