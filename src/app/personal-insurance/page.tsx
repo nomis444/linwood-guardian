@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AnimateIn } from "@/components/AnimateIn";
-import { PERSONAL_LINES } from "@/lib/constants";
+import { PERSONAL_LINES, PET_INSURANCE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Personal Insurance",
@@ -131,6 +131,19 @@ export default function PersonalInsurancePage() {
                   <p className="text-text-secondary text-sm leading-relaxed">
                     {coverage.description}
                   </p>
+                  {coverage.title === "Pet Insurance" && PET_INSURANCE.quoteUrl && (
+                    <a
+                      href={PET_INSURANCE.quoteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-4 bg-teal hover:bg-teal-light text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
+                    >
+                      Get a Pet Insurance Quote
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  )}
                 </div>
               </AnimateIn>
             ))}

@@ -22,7 +22,7 @@ export const TEAM = {
     credentials: "ACSR, AINS",
     title: "Managing Partner, Commercial Insurance",
     phone: "(716) 710-8910",
-    email: "tboyle@linwoodguardian.com",
+    email: "customerservice@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/tamaraboyle1",
   },
   joe: {
@@ -30,7 +30,7 @@ export const TEAM = {
     credentials: "",
     title: "Principal",
     phone: "(716) 710-8910",
-    email: "JoeMesi@linwoodguardian.com",
+    email: "customerservice@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/joe-mesi-6b285966/",
   },
 } as const;
@@ -42,8 +42,15 @@ export const PERSONAL_LINES = {
 
 export const SOCIAL = {
   // Leave a value empty and it simply will not render anywhere on the site.
-  linkedin: "https://www.linkedin.com/in/tamaraboyle1",
-  facebook: "", // AWAITING URL from Tamara (requested 2026-07-27)
+  // Company profiles — NOT personal ones (client request 2026-07-30).
+  linkedin: "https://www.linkedin.com/company/linwood-guardian-risk-management-llc",
+  facebook: "https://www.facebook.com/Linwoodguardian/",
+} as const;
+
+export const PET_INSURANCE = {
+  // Third-party pet insurance quote link — PENDING from Tamara (2026-07-30).
+  // Leave empty and the "Get a Pet Insurance Quote" button will not render.
+  quoteUrl: "",
 } as const;
 
 export const LICENSING = {
