@@ -10,6 +10,7 @@ interface ChatMessage {
 }
 
 const SESSION_KEY = "lg_chat";
+const SECTION_ID = "linwood-chat";
 
 const pageSuggestions: Record<string, string[]> = {
   "/": [
@@ -82,14 +83,35 @@ function renderContent(content: string) {
   });
 }
 
+function ShieldIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+      />
+    </svg>
+  );
+}
+
+function Avatar() {
+  return (
+    <div className="w-8 h-8 rounded-full bg-navy flex items-center justify-center flex-shrink-0 mt-0.5">
+      <span className="text-white text-[10px] font-bold">LG</span>
+    </div>
+  );
+}
+
 export function KateChatbot() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [launcherVisible, setLauncherVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -119,11 +141,24 @@ export function KateChatbot() {
     }
   }, [messages, isLoading]);
 
+  // Hide the launcher pill while the chat section is on screen
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isOpen]);
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setLauncherVisible(!entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const scrollToChat = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => {
+      inputRef.current?.focus({ preventScroll: true });
+    }, 600);
+  };
 
   const sendMessage = useCallback(
     async (content: string) => {
@@ -229,189 +264,171 @@ export function KateChatbot() {
 
   return (
     <>
-      {/* Floating bubble */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-teal text-white shadow-lg hover:bg-teal-light hover:scale-110 transition-all duration-200 flex items-center justify-center"
-          aria-label="Open chat"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-            />
-          </svg>
-        </button>
-      )}
-
-      {/* Chat panel */}
-      {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-border flex flex-col chat-panel-enter"
-          style={{ height: "min(600px, calc(100vh - 6rem))" }}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-border bg-navy rounded-t-2xl">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-teal flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-white font-semibold text-sm">Linwood Guardian</p>
-                <p className="text-white/60 text-xs">Insurance Assistant</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white/60 hover:text-white transition-colors p-1"
-              aria-label="Close chat"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+      {/* Embedded chat section — sits above the footer on every page */}
+      <section
+        id={SECTION_ID}
+        ref={sectionRef}
+        className="relative bg-gradient-to-b from-sky/40 to-white border-t border-border scroll-mt-24"
+      >
+        {/* Header */}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-12 pb-6 text-center">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-navy mb-4">
+            <ShieldIcon className="w-7 h-7 text-teal-light" />
           </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-navy font-[family-name:var(--font-merriweather)] mb-2">
+            Have an Insurance Question?
+          </h2>
+          <p className="text-text-secondary text-sm max-w-md mx-auto">
+            Ask our AI assistant about commercial or personal coverage, get
+            plain-English answers, or find out what a quote takes.
+          </p>
+        </div>
 
-          {/* Messages */}
-          <div ref={containerRef} className="flex-1 overflow-y-auto py-4 space-y-3">
-            {/* Welcome state */}
-            {!hasMessages && (
-              <div className="px-4 py-4">
-                <div className="flex items-start gap-2.5 mb-5">
-                  <div className="w-7 h-7 rounded-full bg-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-[10px] font-bold">LG</span>
+        {/* Chat card */}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
+            {/* Messages */}
+            <div
+              ref={containerRef}
+              className={`overflow-y-auto ${hasMessages ? "min-h-[200px] max-h-[480px]" : ""} py-4 space-y-3`}
+            >
+              {/* Welcome state */}
+              {!hasMessages && (
+                <div className="px-4 sm:px-6 py-8">
+                  <div className="flex items-start gap-3 mb-6">
+                    <Avatar />
+                    <div className="bg-sky rounded-2xl rounded-bl-md px-5 py-3 text-sm text-text-primary leading-relaxed max-w-[85%]">
+                      Hi! I&apos;m the Linwood Guardian assistant. I can answer
+                      questions about commercial and personal insurance, help you
+                      figure out what coverage you need, or connect you with our
+                      team. How can I help?
+                    </div>
                   </div>
-                  <div className="bg-sky rounded-2xl rounded-bl-md px-4 py-3 text-sm text-text-primary leading-relaxed max-w-[85%]">
-                    Hi! I&apos;m the Linwood Guardian assistant. I can answer
-                    questions about commercial and personal insurance, help you
-                    figure out what coverage you need, or connect you with our
-                    team. How can I help?
+
+                  {/* Suggestion chips */}
+                  <div className="flex flex-wrap gap-2 ml-11">
+                    {chips.map((chip) => (
+                      <button
+                        key={chip}
+                        onClick={() => sendMessage(chip)}
+                        className="text-sm border border-teal/25 text-teal bg-sky/60 hover:bg-teal/10 hover:border-teal/40 rounded-full px-4 py-2 transition-all"
+                      >
+                        {chip}
+                      </button>
+                    ))}
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2 ml-9">
-                  {chips.map((chip) => (
-                    <button
-                      key={chip}
-                      onClick={() => sendMessage(chip)}
-                      className="text-xs border border-teal/25 text-teal bg-sky hover:bg-teal/10 hover:border-teal/40 rounded-full px-3 py-1.5 transition-all"
-                    >
-                      {chip}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
+              )}
 
-            {/* Conversation */}
-            {hasMessages && (
-              <div className="px-3 space-y-3">
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex items-start gap-2 chat-msg-enter ${
-                      msg.role === "user" ? "flex-row-reverse" : ""
-                    }`}
-                  >
-                    {msg.role === "assistant" && (
-                      <div className="w-7 h-7 rounded-full bg-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-white text-[10px] font-bold">LG</span>
-                      </div>
-                    )}
+              {/* Conversation */}
+              {hasMessages && (
+                <div className="px-3 sm:px-4 space-y-3">
+                  {messages.map((msg) => (
                     <div
-                      className={`max-w-[80%] px-4 py-2.5 text-sm leading-relaxed ${
-                        msg.role === "user"
-                          ? "bg-teal text-white rounded-2xl rounded-br-md"
-                          : "bg-sky text-text-primary rounded-2xl rounded-bl-md"
+                      key={msg.id}
+                      className={`flex items-start gap-2.5 chat-msg-enter ${
+                        msg.role === "user" ? "flex-row-reverse" : ""
                       }`}
                     >
-                      {msg.role === "user"
-                        ? msg.content
-                        : msg.content
-                        ? renderContent(msg.content)
-                        : null}
-                    </div>
-                  </div>
-                ))}
-
-                {isLoading &&
-                  messages.length > 0 &&
-                  messages[messages.length - 1]?.content === "" && (
-                    <div className="flex items-start gap-2">
-                      <div className="w-7 h-7 rounded-full bg-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="text-white text-[10px] font-bold">LG</span>
+                      {msg.role === "assistant" && <Avatar />}
+                      <div
+                        className={`max-w-[80%] px-4 py-2.5 text-sm leading-relaxed ${
+                          msg.role === "user"
+                            ? "bg-teal text-white rounded-2xl rounded-br-md"
+                            : "bg-sky text-text-primary rounded-2xl rounded-bl-md"
+                        }`}
+                      >
+                        {msg.role === "user"
+                          ? msg.content
+                          : msg.content
+                          ? renderContent(msg.content)
+                          : null}
                       </div>
-                      <div className="bg-sky rounded-2xl rounded-bl-md px-4 py-3">
-                        <div className="flex items-center gap-1">
-                          <span
-                            className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
-                            style={{ animationDelay: "0ms" }}
-                          />
-                          <span
-                            className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
-                            style={{ animationDelay: "150ms" }}
-                          />
-                          <span
-                            className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
-                            style={{ animationDelay: "300ms" }}
-                          />
+                    </div>
+                  ))}
+
+                  {isLoading &&
+                    messages[messages.length - 1]?.content === "" && (
+                      <div className="flex items-start gap-2.5">
+                        <Avatar />
+                        <div className="bg-sky rounded-2xl rounded-bl-md px-4 py-3">
+                          <div className="flex items-center gap-1">
+                            <span
+                              className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
+                              style={{ animationDelay: "0ms" }}
+                            />
+                            <span
+                              className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
+                              style={{ animationDelay: "150ms" }}
+                            />
+                            <span
+                              className="w-1.5 h-1.5 bg-text-secondary/50 rounded-full animate-bounce"
+                              style={{ animationDelay: "300ms" }}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-
-                <div ref={messagesEndRef} />
-              </div>
-            )}
-          </div>
-
-          {/* Input */}
-          <div className="border-t border-border p-3 bg-warm-white rounded-b-2xl">
-            <div className="flex items-end gap-2">
-              <textarea
-                ref={inputRef}
-                value={inputValue}
-                onChange={handleInput}
-                onKeyDown={handleKeyDown}
-                placeholder="Ask about insurance..."
-                disabled={isLoading}
-                rows={1}
-                className="flex-1 resize-none rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal disabled:opacity-50 transition-all"
-              />
-              <button
-                onClick={handleSubmit}
-                disabled={!inputValue.trim() || isLoading}
-                className="w-10 h-10 flex items-center justify-center rounded-xl bg-navy hover:bg-navy-dark text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
-              >
-                <svg
-                  className="w-4.5 h-4.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 12h14M12 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+                    )}
+                </div>
+              )}
             </div>
-            <p className="text-[10px] text-text-secondary/60 mt-1.5 text-center">
-              AI assistant — responses are informational, not insurance advice.
-            </p>
+
+            {/* Input */}
+            <div className="border-t border-border p-4 bg-warm-white">
+              <div className="flex items-end gap-3">
+                <textarea
+                  ref={inputRef}
+                  value={inputValue}
+                  onChange={handleInput}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask about insurance..."
+                  disabled={isLoading}
+                  rows={1}
+                  className="flex-1 resize-none rounded-xl border border-border bg-white px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-teal/20 focus:border-teal disabled:opacity-50 transition-all"
+                />
+                <button
+                  onClick={handleSubmit}
+                  disabled={!inputValue.trim() || isLoading}
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-navy hover:bg-navy-dark text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+                  aria-label="Send message"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              <p className="text-[10px] text-text-secondary/60 mt-2 text-center">
+                AI assistant — responses are informational, not insurance advice.
+              </p>
+            </div>
           </div>
         </div>
-      )}
+
+        <div className="h-12" />
+      </section>
+
+      {/* Launcher pill — scrolls to the chat section, hides when it's in view */}
+      <button
+        onClick={scrollToChat}
+        aria-hidden={!launcherVisible}
+        tabIndex={launcherVisible ? 0 : -1}
+        className={`fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-navy hover:bg-navy-dark text-white pl-4 pr-5 py-3 rounded-full shadow-lg shadow-navy/25 hover:shadow-xl transition-all duration-300 group ${
+          launcherVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
+        <ShieldIcon className="w-5 h-5 text-teal-light" />
+        <span className="text-sm font-medium">Ask a question</span>
+        <svg
+          className="w-4 h-4 text-white/50 group-hover:text-white/80 transition-colors"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
     </>
   );
 }
