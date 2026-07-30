@@ -12,14 +12,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-28 sm:h-36">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/images/logo-white.jpg"
               alt="Linwood Guardian Risk Management"
-              width={260}
-              height={65}
-              className="h-16 w-auto"
+              width={431}
+              height={218}
+              className="h-24 sm:h-32 w-auto"
               priority
             />
           </Link>
