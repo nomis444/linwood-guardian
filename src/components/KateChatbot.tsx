@@ -51,8 +51,8 @@ function getSuggestions(pathname: string): string[] {
   return pageSuggestions["/"];
 }
 
-function renderContent(content: string) {
-  const parts = content.split(/(\[.*?\]\(.*?\)|\*\*.*?\*\*|\n)/g);
+function renderInline(text: string) {
+  const parts = text.split(/(\[.*?\]\(.*?\)|\*\*.*?\*\*)/g);
 
   return parts.map((part, i) => {
     const linkMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
@@ -77,10 +77,57 @@ function renderContent(content: string) {
       );
     }
 
-    if (part === "\n") return <br key={i} />;
-
     return <span key={i}>{part}</span>;
   });
+}
+
+function renderContent(content: string) {
+  const lines = content.split("\n");
+  const out: React.ReactNode[] = [];
+
+  lines.forEach((line, i) => {
+    const trimmed = line.trim();
+
+    // Markdown dividers (---, ***, ___) — drop entirely
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(trimmed)) return;
+
+    // Blank line — paragraph spacing
+    if (trimmed === "") {
+      out.push(<span key={i} className="block h-2" aria-hidden="true" />);
+      return;
+    }
+
+    // Markdown heading (#, ##, ###...) — render as a bold line, no hashes
+    const heading = trimmed.match(/^#{1,6}\s+(.*)$/);
+    if (heading) {
+      out.push(
+        <span key={i} className="block font-semibold text-navy">
+          {renderInline(heading[1])}
+        </span>
+      );
+      return;
+    }
+
+    // Bullet line (- item, * item, • item) — render a styled bullet
+    const bullet = trimmed.match(/^[-*•]\s+(.*)$/);
+    if (bullet) {
+      out.push(
+        <span key={i} className="flex gap-2 pl-1">
+          <span className="text-teal flex-shrink-0">•</span>
+          <span>{renderInline(bullet[1])}</span>
+        </span>
+      );
+      return;
+    }
+
+    out.push(
+      <span key={i} className="block">
+        {renderInline(line)}
+      </span>
+    );
+  });
+
+  return out;
 }
 
 function ShieldIcon({ className }: { className?: string }) {
