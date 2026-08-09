@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { COMPANY, SOCIAL, LICENSING, licensingStatement } from "@/lib/constants";
+import { COMPANY, SOCIAL, licensingStatement } from "@/lib/constants";
 
 export function Footer() {
   return (
@@ -89,11 +89,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-white/60 space-y-1">
-          <p>
-            &copy; {new Date().getFullYear()} {COMPANY.legalName}. All rights reserved.
-          </p>
-          {LICENSING.dbaDisclosure && <p>{LICENSING.dbaDisclosure}</p>}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-xs text-white/50">
+          &copy; {new Date().getFullYear()} {COMPANY.legalName}. All rights reserved.
         </div>
       </div>
     </footer>

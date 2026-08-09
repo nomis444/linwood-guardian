@@ -47,6 +47,14 @@ export const SOCIAL = {
   facebook: "https://www.facebook.com/Linwoodguardian/",
 } as const;
 
+/**
+ * Google Analytics 4. Measurement ID supplied by the client 2026-08-09.
+ * Empty string disables analytics everywhere — nothing else needs changing.
+ */
+export const ANALYTICS = {
+  gaMeasurementId: "G-TH3ZF89CDS",
+} as const;
+
 export const PET_INSURANCE = {
   // Third-party pet insurance quote link — PENDING from Tamara (2026-07-30).
   // Leave empty and the "Get a Pet Insurance Quote" button will not render.
@@ -55,16 +63,17 @@ export const PET_INSURANCE = {
 
 export const LICENSING = {
   homeState: "New York",
-  // Only add a state once the client has confirmed it in writing — a licensure
-  // claim for a state they are not admitted in is a regulatory problem, not a
-  // copy problem. California confirmed by Tamara 2026-08-09 (CA DOI license
-  // #6018396, supplied in her email signature).
-  additionalStates: ["California"] as readonly string[],
-
-  // California requires an agency transacting under a name other than its legal
-  // name to disclose the DBA and its license number. Reproduced VERBATIM as the
-  // client supplied it — this is a compliance artifact, do not reword it.
-  dbaDisclosure: "Doing business in CA as Linwood Guardian Insurance Agency #6018396",
+  // Linwood Guardian is licensed beyond NYS, but the specific states have not
+  // been provided yet (asked Tamara 2026-07-27). Do NOT populate this from
+  // assumption — a licensure claim for a state they are not admitted in is a
+  // regulatory problem, not a copy problem.
+  //
+  // NOTE: Tamara's email signature carries "Doing business in CA as Linwood
+  // Guardian Insurance Agency #6018396". That is a CA DBA disclosure and it
+  // implies a CA license, but she has not asked for it on the site and a
+  // signature block is not an instruction to publish a regulated claim.
+  // Confirm with her before adding either the state or the disclosure.
+  additionalStates: [] as readonly string[],
 };
 
 /** "Licensed in New York State" — plus any additional states, once confirmed. */
