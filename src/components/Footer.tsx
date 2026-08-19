@@ -18,7 +18,7 @@ export function Footer() {
             />
             <p className="text-white/70 text-sm leading-relaxed mt-4">
               Independent commercial insurance agency serving Buffalo
-              and Western New York with over 35 years of combined
+              and Western New York with over 75 years of combined
               expertise.
             </p>
             <address className="not-italic text-sm text-white/70 mt-6 space-y-1">

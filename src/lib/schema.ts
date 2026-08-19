@@ -7,7 +7,7 @@ export function generateInsuranceAgencySchema() {
     name: COMPANY.name,
     legalName: COMPANY.legalName,
     description:
-      "Independent commercial insurance agency in Buffalo, NY with over 35 years of combined expertise. Specializing in property & casualty, professional liability, management liability, workers' compensation, bonds, and cyber insurance for businesses across Western New York.",
+      "Independent commercial insurance agency in Buffalo, NY with over 75 years of combined expertise. Specializing in property & casualty, professional liability, management liability, workers' compensation, bonds, and cyber insurance for businesses across Western New York.",
     url: COMPANY.url,
     telephone: COMPANY.phone,
     // sameAs ties the verified social profiles to this entity, which is how

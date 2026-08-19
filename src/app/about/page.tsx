@@ -8,7 +8,7 @@ import { TEAM } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet the team behind Linwood Guardian Risk Management — Joe Mesi and Tamara Boyle, ACSR, AINS. Over 35 years of combined commercial insurance expertise serving Buffalo and Western New York.",
+    "Meet the team behind Linwood Guardian Risk Management. Joe Mesi and Tamara Boyle, ACSR, AINS. Over 75 years of combined commercial insurance expertise serving Buffalo and Western New York.",
 };
 
 export default function AboutPage() {
@@ -27,7 +27,7 @@ export default function AboutPage() {
             </h1>
             <p className="text-lg text-white/80 leading-relaxed animate-hero-body">
               Linwood Guardian Risk Management was established by hometown
-              principals who collectively bring over 35 years of insurance
+              principals who collectively bring over 75 years of insurance
               expertise to the Buffalo community. We leverage deep industry
               knowledge to provide customized insurance solutions for businesses
               across Western New York.
@@ -88,7 +88,7 @@ export default function AboutPage() {
                 phone={TEAM.joe.phone}
                 email={TEAM.joe.email}
                 linkedin={TEAM.joe.linkedin}
-                bio="Joe Mesi is the founder and owner of Mesi Agency Inc., which he has operated for over 37 years. A licensed insurance broker and agency principal, Joe transitioned from a major national insurance company to build an independent agency that puts client needs first. His decades of experience span personal and commercial lines, giving him a comprehensive understanding of how businesses and individuals manage risk across every stage of growth."
+                bio="Joe Mesi is the founder and operator of Mesi Agency Inc., which he has operated for close to 40 years. A licensed insurance broker and agency principal, Joe transitioned from a major national insurance company to build an independent agency that puts client needs first. His decades of experience span personal and commercial lines, giving him a comprehensive understanding of how businesses and individuals manage risk across every stage of growth."
               />
             </AnimateIn>
             <AnimateIn>
@@ -99,7 +99,8 @@ export default function AboutPage() {
                 phone={TEAM.tamara.phone}
                 email={TEAM.tamara.email}
                 linkedin={TEAM.tamara.linkedin}
-                bio="Tamara Boyle brings deep commercial lines expertise earned across Western New York's top insurance agencies, including Tompkins Insurance, Scott Danahy Naylon, and The Evans Agency. She holds both the Accredited Customer Service Representative (ACSR) and Associate in Insurance (AINS) designations — credentials that reflect advanced knowledge of commercial coverage, underwriting, and risk assessment. Tamara specializes in finding the right coverage for complex commercial accounts."
+                photo={TEAM.tamara.photo}
+                bio="Tamara Boyle brings over 35 years of commercial lines expertise earned across Western New York's top insurance agencies, including formerly Tompkins Insurance, Scott Danahy Naylon, and The Evans Agency. She holds both the Accredited Customer Service Representative (ACSR) and Associate in Insurance (AINS) designations, credentials that reflect advanced knowledge of commercial coverage, underwriting, and risk assessment. Tamara specializes in finding the right coverage for complex commercial accounts whether the business is local, nationwide, or global."
               />
             </AnimateIn>
           </div>

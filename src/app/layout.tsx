@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | Linwood Guardian Risk Management",
   },
   description:
-    "Buffalo's trusted commercial insurance experts with 35+ years combined experience. Property & casualty, professional liability, workers' comp, bonds, and cyber insurance for businesses across Western New York.",
+    "Buffalo's trusted commercial insurance experts with 75+ years combined experience. Property & casualty, professional liability, workers' comp, bonds, and cyber insurance for businesses across Western New York.",
   keywords: [
     "commercial insurance Buffalo NY",
     "business insurance Buffalo NY",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Linwood Guardian Risk Management | Commercial Insurance Buffalo NY",
     description:
-      "Independent commercial insurance agency in Buffalo, NY with 35+ years of combined expertise. Protecting businesses across Western New York.",
+      "Independent commercial insurance agency in Buffalo, NY with 75+ years of combined expertise. Protecting businesses across Western New York.",
     url: "https://linwoodguardian.com",
     siteName: "Linwood Guardian Risk Management",
     locale: "en_US",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Linwood Guardian Risk Management",
     description:
-      "Buffalo's trusted commercial insurance experts. 35+ years combined experience.",
+      "Buffalo's trusted commercial insurance experts. 75+ years combined experience.",
   },
   robots: {
     index: true,

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function TeamMember({
   name,
   title,
@@ -6,6 +8,7 @@ export function TeamMember({
   email,
   linkedin,
   bio,
+  photo,
 }: {
   name: string;
   title: string;
@@ -14,15 +17,27 @@ export function TeamMember({
   email: string;
   linkedin: string;
   bio: string;
+  /** Headshot path. Empty or omitted falls back to initials. */
+  photo?: string;
 }) {
   return (
     <div className="bg-white rounded-xl border border-border p-8">
-      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-navy to-teal flex items-center justify-center text-white text-2xl font-bold mb-6 font-[family-name:var(--font-merriweather)]">
-        {name
-          .split(" ")
-          .map((n) => n[0])
-          .join("")}
-      </div>
+      {photo ? (
+        <Image
+          src={photo}
+          alt={`${name}, ${title} at Linwood Guardian Risk Management`}
+          width={96}
+          height={96}
+          className="w-24 h-24 rounded-full object-cover mb-6"
+        />
+      ) : (
+        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-navy to-teal flex items-center justify-center text-white text-2xl font-bold mb-6 font-[family-name:var(--font-merriweather)]">
+          {name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")}
+        </div>
+      )}
       <h3 className="text-xl font-bold text-navy font-[family-name:var(--font-merriweather)]">
         {name}
         {credentials && (

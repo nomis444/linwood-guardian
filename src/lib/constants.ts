@@ -12,7 +12,7 @@ export const COMPANY = {
   },
   hours: "Monday – Friday, 9:00 AM – 5:00 PM",
   founded: "2022",
-  experience: "35+",
+  experience: "75+",
   url: "https://linwoodguardian.com",
 } as const;
 
@@ -20,10 +20,15 @@ export const TEAM = {
   tamara: {
     name: "Tamara Boyle",
     credentials: "ACSR, AINS",
-    title: "Managing Partner, Commercial Insurance",
+    title: "Co-Principal, Commercial Insurance",
     phone: "(716) 710-8910",
     email: "customerservice@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/tamaraboyle1",
+    // Headshot: Tamara sent one 2026-08-18 but the attachment was not saved.
+    // Drop the file at public/images/tamara-boyle.jpg and set this to
+    // "/images/tamara-boyle.jpg". While empty the card shows initials, so the
+    // site never renders a broken image.
+    photo: "",
   },
   joe: {
     name: "Joe Mesi",
@@ -32,6 +37,7 @@ export const TEAM = {
     phone: "(716) 710-8910",
     email: "customerservice@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/joe-mesi-6b285966/",
+    photo: "",
   },
 } as const;
 

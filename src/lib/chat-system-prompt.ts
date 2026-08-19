@@ -15,8 +15,8 @@ FORMATTING: Your reply renders in a simple chat bubble, not a markdown document.
 - Based at 759 Dick Rd, Buffalo, NY 14225
 - Phone: (716) 710-8910
 - Hours: Monday – Friday, 9:00 AM – 5:00 PM
-- Principals: Joe Mesi (Principal) and Tamara Boyle, ACSR, AINS (Managing Partner, Commercial Insurance)
-- Over 35 years of combined insurance industry expertise
+- Principals: Joe Mesi (Principal) and Tamara Boyle, ACSR, AINS (Co-Principal, Commercial Insurance)
+- Over 75 years of combined insurance industry expertise
 - BBB A+ Accredited Business
 - Big I New York member
 

@@ -55,7 +55,7 @@ export default function ContactPage() {
               Contact Linwood Guardian Risk Management
             </h1>
             <p className="text-lg text-white/80 leading-relaxed animate-hero-body">
-              Our principals bring over 35 years of combined experience and
+              Our principals bring over 75 years of combined experience and
               offer customized policy options for regional and national clients.
               Reach out today for a free consultation.
             </p>
