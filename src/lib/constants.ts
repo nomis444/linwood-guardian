@@ -24,11 +24,11 @@ export const TEAM = {
     phone: "(716) 710-8910",
     email: "customerservice@linwoodguardian.com",
     linkedin: "https://www.linkedin.com/in/tamaraboyle1",
-    // Headshot: Tamara sent one 2026-08-18 but the attachment was not saved.
-    // Drop the file at public/images/tamara-boyle.jpg and set this to
-    // "/images/tamara-boyle.jpg". While empty the card shows initials, so the
-    // site never renders a broken image.
-    photo: "",
+    // Headshot supplied by Tamara 2026-08-18, installed 2026-08-19.
+    // Source is her 512x640 portrait, square-cropped to 512x512 with a slight
+    // upward bias so the circular mask centres on her face rather than clipping
+    // the top of her head. Empty falls back to initials.
+    photo: "/images/tamara-boyle.jpg",
   },
   joe: {
     name: "Joe Mesi",
