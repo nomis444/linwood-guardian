@@ -57,13 +57,21 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-4">Trusted &amp; Accredited</h3>
             <div className="flex items-start gap-4 mb-6">
-              <Image
-                src="/images/bbb-qr.jpeg"
-                alt="BBB Accredited Business - Linwood Guardian Risk Management LLC"
-                width={100}
-                height={100}
-                className="rounded-lg"
-              />
+              {/* BBB "Request a Quote" link, supplied by Tamara 2026-06-03 */}
+              <a
+                href="https://www.bbb.org/upstate-new-york/quote/request-linwood-guardian-risk-management-llc-236023809/#buttonclick"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                aria-label="Request a quote from Linwood Guardian through the Better Business Bureau"
+              >
+                <Image
+                  src="/images/bbb-qr.jpeg"
+                  alt="BBB Accredited Business - Linwood Guardian Risk Management LLC"
+                  width={100}
+                  height={100}
+                  className="rounded-lg"
+                />
+              </a>
             </div>
             <ul className="space-y-2 text-sm text-white/70">
               <li>BBB A+ Accredited Business</li>

@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AnimateIn } from "@/components/AnimateIn";
 import { BlogCard } from "@/components/BlogCard";
 import { blogPosts } from "@/lib/blog-data";
+import { HeroBackground } from "@/components/HeroBackground";
 
 export const metadata: Metadata = {
   title: "Articles & Insights",
@@ -21,8 +22,9 @@ export default function BlogPage() {
         <Breadcrumbs items={[{ name: "Articles", href: "/blog" }]} />
       </div>
 
-      <section className="bg-navy text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-navy text-white py-16 md:py-24 overflow-hidden">
+        <HeroBackground priority />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-merriweather)] mb-6 animate-hero-title">
               Articles &amp; Insights

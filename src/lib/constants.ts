@@ -62,9 +62,9 @@ export const ANALYTICS = {
 } as const;
 
 export const PET_INSURANCE = {
-  // Third-party pet insurance quote link — PENDING from Tamara (2026-07-30).
+  // Prudent Pet quoting link with Linwood's promo code, from Tamara's 2026-06-03 email.
   // Leave empty and the "Get a Pet Insurance Quote" button will not render.
-  quoteUrl: "",
+  quoteUrl: "https://app.prudentpet.com/?promoCode=03806150NY",
 } as const;
 
 export const LICENSING = {

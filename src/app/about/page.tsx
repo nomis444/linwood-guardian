@@ -4,6 +4,7 @@ import { AnimateIn } from "@/components/AnimateIn";
 import { TeamMember } from "@/components/TeamMember";
 import { TrustSignals } from "@/components/TrustSignals";
 import { TEAM } from "@/lib/constants";
+import { HeroBackground } from "@/components/HeroBackground";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -19,8 +20,9 @@ export default function AboutPage() {
       </div>
 
       {/* Hero */}
-      <section className="bg-navy text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-navy text-white py-16 md:py-24 overflow-hidden">
+        <HeroBackground priority />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-merriweather)] mb-6 animate-hero-title">
               Insurance Delivered with Unparalleled Insight and Experience

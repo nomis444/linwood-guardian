@@ -5,6 +5,7 @@ import { AnimateIn } from "@/components/AnimateIn";
 import { ServiceCard } from "@/components/ServiceCard";
 import { JsonLd } from "@/components/JsonLd";
 import { generateServiceSchema } from "@/lib/schema";
+import { HeroBackground } from "@/components/HeroBackground";
 
 export const metadata: Metadata = {
   title: "Business Insurance",
@@ -98,8 +99,9 @@ export default function BusinessInsurancePage() {
       </div>
 
       {/* Hero */}
-      <section className="bg-navy text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-navy text-white py-16 md:py-24 overflow-hidden">
+        <HeroBackground priority />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-merriweather)] mb-6 animate-hero-title">
               Commercial Insurance Solutions for Every Business

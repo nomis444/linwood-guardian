@@ -4,6 +4,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { TrustSignals } from "@/components/TrustSignals";
 import { JsonLd } from "@/components/JsonLd";
 import { generateFAQSchema } from "@/lib/schema";
+import { HeroBackground } from "@/components/HeroBackground";
 
 const FAQ_ITEMS = [
   {
@@ -108,6 +109,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative bg-navy overflow-hidden">
+        <HeroBackground priority />
         <div className="absolute top-20 right-10 w-72 h-72 bg-teal/10 rounded-full blur-3xl animate-float" aria-hidden="true" />
         <div className="absolute bottom-20 left-10 w-56 h-56 bg-forest/10 rounded-full blur-2xl animate-float" style={{ animationDelay: "3s" }} aria-hidden="true" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">

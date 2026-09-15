@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AnimateIn } from "@/components/AnimateIn";
 import { JsonLd } from "@/components/JsonLd";
 import { generateFAQSchema, generateServiceSchema } from "@/lib/schema";
+import { HeroBackground } from "@/components/HeroBackground";
 
 export const metadata: Metadata = {
   title: "Management Liability Insurance Buffalo NY",
@@ -74,8 +75,9 @@ export default function ManagementLiabilityPage() {
       />
 
       {/* Hero */}
-      <section className="bg-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <section className="relative bg-navy overflow-hidden">
+        <HeroBackground priority />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <Breadcrumbs
             items={[
               { name: "Business Insurance", href: "/business-insurance" },
