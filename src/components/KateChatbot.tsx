@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@/lib/analytics";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
@@ -226,6 +227,7 @@ export function KateChatbot() {
 
       setMessages((prev) => [...prev, userMsg, assistantMsg]);
       setIsLoading(true);
+      track("chat_message", { page: pathname || "/" });
 
       const apiMessages = [
         ...messages.map((m) => ({ role: m.role, content: m.content })),

@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { VEHICLE_USE_OPTIONS, isDeclinedVehicleUse } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, coverage, business, message } = body;
+    const { name, email, phone, coverage, business, message, vehicleUse } = body;
 
     if (!name || !email || !phone || !coverage) {
       return NextResponse.json(
@@ -12,13 +13,29 @@ export async function POST(request: Request) {
       );
     }
 
+    // Commercial Auto for a line Linwood does not place (for-hire passenger or
+    // for-hire trucking). The form already showed the visitor the appetite
+    // message instead of a submit button; this is the server-side backstop so a
+    // hand-built POST cannot land one in Tamara's inbox either. Logged, counted
+    // in GA4 by the form, never forwarded to Make.
+    if (coverage === "Commercial Auto" && isDeclinedVehicleUse(vehicleUse)) {
+      console.log("Contact form declined (out of appetite):", { coverage, vehicleUse });
+      return NextResponse.json({ success: true, declined: true });
+    }
+
+    const vehicleUseLabel = VEHICLE_USE_OPTIONS.find((o) => o.value === vehicleUse)?.label;
+
     const submission = {
       name,
       email,
       phone,
       coverage,
       business: business || "Not provided",
-      message: message || "No message",
+      // The Make scenario maps `message` into the email, so the vehicle-use
+      // answer rides inside it rather than needing a new mapping in Make.
+      message: vehicleUseLabel
+        ? `Vehicle use: ${vehicleUseLabel}\n\n${message || "No message"}`
+        : message || "No message",
       timestamp: new Date().toISOString(),
     };
     console.log("Contact form submission:", submission);

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { KateChatbot } from "@/components/KateChatbot";
+import { PhoneClickTracker } from "@/components/PhoneClickTracker";
 import { JsonLd } from "@/components/JsonLd";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { generateInsuranceAgencySchema } from "@/lib/schema";
@@ -84,6 +85,7 @@ export default function RootLayout({
         </main>
         <KateChatbot />
         <Footer />
+        <PhoneClickTracker />
       </body>
       {/*
         Google Analytics 4 (client request 2026-08-09). Uses Next's official

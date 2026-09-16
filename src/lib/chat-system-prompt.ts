@@ -1,3 +1,5 @@
+import { APPETITE, notPlacedStatement, notPlacedReferral } from "./constants"
+
 export function buildSystemPrompt(currentPage: string): string {
   const pageContext = getPageContext(currentPage)
 
@@ -24,7 +26,7 @@ FORMATTING: Your reply renders in a simple chat bubble, not a markdown document.
 Linwood Guardian specializes in the following commercial coverage areas:
 
 ### Property & Casualty
-Commercial property, general liability, commercial auto, contractors insurance, cyber/privacy liability, habitational (apartment buildings, mixed-use), manufacturing, technology, garage operations, and businessowners policies (BOP).
+Commercial property, general liability, commercial auto for business fleets, contractors insurance, cyber/privacy liability, habitational (apartment buildings, mixed-use), manufacturing, technology, garage operations, and businessowners policies (BOP).
 
 ### Professional Liability (E&O)
 Errors and omissions coverage for: architects & engineers, attorneys & law firms, consultants & advisory firms, IT professionals & technology firms, accountants & CPAs, real estate agents & brokers, medical professionals, contractors, manufacturing, beauty & personal care services.
@@ -58,6 +60,11 @@ Contact: (716) 710-8910
 - Real Estate & Property
 - Auto & Garage Operations
 - Professional Services (attorneys, architects, engineers, accountants, consultants)
+
+## APPETITE — WHAT LINWOOD DOES NOT PLACE
+${notPlacedStatement()}
+- If the visitor describes for-hire passenger transport (taxi, livery, limousine, rideshare) or for-hire trucking or hauling, say in ONE sentence that Linwood does not place that coverage. ${APPETITE.referral ? `Then tell them: ${notPlacedReferral()}` : "Suggest a specialty transportation agency."} Do NOT collect their name or contact details for a quote and do NOT send them to the quote form. Stay courteous. If they push, repeat it once, politely, and do not argue.
+- For any commercial auto question, ask what the vehicles are used for BEFORE anything else, because that decides whether Linwood can help. Commercial auto Linwood writes: ${APPETITE.commercialAutoFor}.
 
 ## GUARDRAILS — STRICT BOUNDARIES
 

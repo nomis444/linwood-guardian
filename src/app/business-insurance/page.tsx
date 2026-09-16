@@ -17,7 +17,7 @@ const SERVICES = [
   {
     title: "Property & Casualty",
     description:
-      "Commercial property, general liability, commercial auto, contractors, cyber, habitational, manufacturing, technology, garage operations, and businessowners policies.",
+      "Commercial property, general liability, commercial auto for contractors and business fleets, contractors insurance, cyber, habitational, manufacturing, technology, garage operations, and businessowners policies.",
     href: "/business-insurance/property-casualty",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

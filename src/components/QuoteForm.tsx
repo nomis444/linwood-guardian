@@ -1,10 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { COVERAGE_TYPES } from "@/lib/constants";
+import {
+  COVERAGE_TYPES,
+  VEHICLE_USE_OPTIONS,
+  isDeclinedVehicleUse,
+  notPlacedStatement,
+  notPlacedReferral,
+} from "@/lib/constants";
+import { track } from "@/lib/analytics";
+
+const INPUT =
+  "w-full px-4 py-3 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition";
 
 export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [coverage, setCoverage] = useState("");
+  const [vehicleUse, setVehicleUse] = useState("");
+
+  // Commercial Auto asks one follow-up: how the vehicles are used. That answer
+  // decides whether Linwood can help (see APPETITE in constants.ts). The two
+  // for-hire options swap the submit button for a courteous message, count a
+  // GA4 `out_of_appetite`, and never reach the Make webhook, so Tamara's inbox
+  // only carries quotes she can write.
+  const asksVehicleUse = coverage === "Commercial Auto";
+  const declined = asksVehicleUse && isDeclinedVehicleUse(vehicleUse);
+
+  function onVehicleUseChange(value: string) {
+    setVehicleUse(value);
+    if (isDeclinedVehicleUse(value)) track("out_of_appetite", { line: value });
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,8 +45,11 @@ export function QuoteForm() {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error("Failed to send");
+      track("quote_submit", { coverage: String(data.coverage || "") });
       setStatus("sent");
       form.reset();
+      setCoverage("");
+      setVehicleUse("");
     } catch {
       setStatus("error");
     }
@@ -108,8 +136,12 @@ export function QuoteForm() {
           id="coverage"
           name="coverage"
           required
-          className="w-full px-4 py-3 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition bg-white"
-          defaultValue=""
+          className={`${INPUT} bg-white`}
+          value={coverage}
+          onChange={(e) => {
+            setCoverage(e.target.value);
+            setVehicleUse("");
+          }}
         >
           <option value="" disabled>
             Select coverage type
@@ -121,6 +153,30 @@ export function QuoteForm() {
           ))}
         </select>
       </div>
+      {asksVehicleUse && (
+        <div>
+          <label htmlFor="vehicleUse" className="block text-sm font-medium text-navy mb-1.5">
+            How are the vehicles used? <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="vehicleUse"
+            name="vehicleUse"
+            required
+            className={`${INPUT} bg-white`}
+            value={vehicleUse}
+            onChange={(e) => onVehicleUseChange(e.target.value)}
+          >
+            <option value="" disabled>
+              Select one
+            </option>
+            {VEHICLE_USE_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-navy mb-1.5">
           Message
@@ -133,13 +189,26 @@ export function QuoteForm() {
           placeholder="Tell us about your business and coverage needs..."
         />
       </div>
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="w-full px-6 py-3.5 bg-teal text-white font-semibold rounded-lg hover:bg-teal-light transition-colors disabled:opacity-60"
-      >
-        {status === "sending" ? "Sending..." : "Request a Quote"}
-      </button>
+      {declined ? (
+        <div
+          role="status"
+          data-testid="out-of-appetite"
+          className="bg-sky rounded-xl p-6 text-text-secondary leading-relaxed"
+        >
+          <p className="font-semibold text-navy mb-2">Thank you for checking with us.</p>
+          <p>
+            {notPlacedStatement()} {notPlacedReferral()}
+          </p>
+        </div>
+      ) : (
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="w-full px-6 py-3.5 bg-teal text-white font-semibold rounded-lg hover:bg-teal-light transition-colors disabled:opacity-60"
+        >
+          {status === "sending" ? "Sending..." : "Request a Quote"}
+        </button>
+      )}
       {status === "error" && (
         <p className="text-red-600 text-sm text-center">
           Something went wrong. Please call us at (716) 710-8910.

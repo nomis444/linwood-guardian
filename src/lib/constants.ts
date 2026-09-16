@@ -129,6 +129,7 @@ export const NAV_LINKS = [
 
 export const COVERAGE_TYPES = [
   "Property & Casualty",
+  "Commercial Auto",
   "Professional Liability",
   "Management Liability",
   "Workers' Compensation",
@@ -136,3 +137,66 @@ export const COVERAGE_TYPES = [
   "Cyber Insurance",
   "Other",
 ] as const;
+
+/**
+ * Underwriting appetite, in one place so the P&C page copy, the FAQ (which feeds
+ * FAQPage schema), the quote form screening, the KATE chat prompt and llms.txt
+ * all say the same thing.
+ *
+ * Why this exists (2026-09-16): ChatGPT started sending Tamara business-quote
+ * calls about ten days after the domain cutover, and several wanted livery,
+ * taxi or truck hauling coverage she has no markets for. The site never named
+ * those lines; assistants inferred them from "commercial auto". Nobody can
+ * remove an agency from an assistant's answer, so the lever is to state plainly
+ * what Linwood does NOT place, and to screen on the site before a call happens.
+ *
+ * PLACEHOLDER WORDING. The gate email to Tamara (AISEO spec, section 4, item 2)
+ * asks for the exact list. Livery, taxi and for-hire trucking are confirmed from
+ * her email; rideshare, limousine, tow and non-emergency medical transport are
+ * reasonable neighbours and should be trimmed or extended to her answer.
+ * `referral` stays empty until she names an agency she sends these callers to.
+ */
+export const APPETITE = {
+  /** Commercial auto: who Linwood writes it for. */
+  commercialAutoFor:
+    "contractors, landscapers, HVAC and trades fleets, local delivery, sales and service organizations, and any Western New York business that owns vehicles or whose employees drive for work",
+  /** Lines Linwood does not place, in the words a caller would use. */
+  notPlaced: [
+    "for-hire passenger transportation (taxi, livery, limousine, rideshare)",
+    "for-hire trucking and hauling",
+  ] as readonly string[],
+  /** Set to an agency name (and optionally phone) once Tamara names one. */
+  referral: "",
+} as const;
+
+/** The one-sentence negative statement, shared by every surface. */
+export function notPlacedStatement(): string {
+  const lines = APPETITE.notPlaced.join(" or ");
+  return `Linwood Guardian Risk Management does not place ${lines}.`;
+}
+
+/** What to tell someone whose business is one of the lines we do not place. */
+export function notPlacedReferral(): string {
+  return APPETITE.referral
+    ? `If that is your business, ${APPETITE.referral} can help you.`
+    : "If that is your business, a specialty transportation agency will serve you better than we can.";
+}
+
+/**
+ * Quote form follow-up when Commercial Auto is selected. The `declined` options
+ * replace the submit button with the appetite message, fire the GA4
+ * `out_of_appetite` event, and never reach the Make webhook.
+ */
+export const VEHICLE_USE_OPTIONS = [
+  { value: "owned-leased", label: "Owned or leased business vehicles", declined: false },
+  { value: "employee-personal", label: "Employees driving personal vehicles for work", declined: false },
+  { value: "delivery", label: "Delivery", declined: false },
+  { value: "for-hire-passenger", label: "For-hire passenger (taxi, livery, rideshare)", declined: true },
+  { value: "for-hire-trucking", label: "For-hire trucking or hauling", declined: true },
+] as const;
+
+export type VehicleUse = (typeof VEHICLE_USE_OPTIONS)[number]["value"];
+
+export function isDeclinedVehicleUse(value: unknown): boolean {
+  return VEHICLE_USE_OPTIONS.some((o) => o.value === value && o.declined);
+}

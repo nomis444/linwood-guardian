@@ -3,6 +3,12 @@ export interface BlogPost {
   title: string;
   excerpt: string;
   date: string;
+  /**
+   * ISO date of the last substantive edit. Omit when the post has not changed
+   * since it was published; the sitemap and Article schema fall back to `date`.
+   * Bump it only when the content changes, never on a rebuild.
+   */
+  modified?: string;
   author: string;
   category: string;
   content: string[];

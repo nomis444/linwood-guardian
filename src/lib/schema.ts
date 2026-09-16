@@ -95,6 +95,7 @@ export function generateArticleSchema(post: {
   slug: string;
   excerpt: string;
   date: string;
+  modified?: string;
   author: string;
 }) {
   return {
@@ -103,7 +104,9 @@ export function generateArticleSchema(post: {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
-    dateModified: post.date,
+    // A real modification date, or the publish date when the post has not
+    // changed. Stamping "today" here would teach crawlers to ignore the signal.
+    dateModified: post.modified ?? post.date,
     author: {
       "@type": "Person",
       name: post.author,

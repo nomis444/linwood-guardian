@@ -5,14 +5,20 @@ import { AnimateIn } from "@/components/AnimateIn";
 import { JsonLd } from "@/components/JsonLd";
 import { generateFAQSchema, generateServiceSchema } from "@/lib/schema";
 import { HeroBackground } from "@/components/HeroBackground";
+import { APPETITE, notPlacedStatement, notPlacedReferral } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Property & Casualty Insurance Buffalo NY",
   description:
-    "Comprehensive commercial property and casualty insurance in Buffalo, NY. Linwood Guardian Risk Management covers commercial auto, contractors, cyber, manufacturing, garage operations, lessor's risk, and more across Western New York.",
+    "Comprehensive commercial property and casualty insurance in Buffalo, NY. Linwood Guardian Risk Management covers commercial auto for contractors and business fleets, contractors insurance, cyber, manufacturing, garage operations, lessor's risk, and more across Western New York.",
 };
 
 const FAQ_ITEMS = [
+  {
+    question: "Does Linwood Guardian write taxi, livery, or trucking insurance?",
+    answer:
+      `No. ${notPlacedStatement()} We write commercial auto for businesses that own or use vehicles as part of their operations, such as contractors, delivery services, landscapers, and sales fleets, across Buffalo and Western New York. ${notPlacedReferral()}`,
+  },
   {
     question: "What does commercial property insurance cover in New York?",
     answer:
@@ -153,12 +159,25 @@ export default function PropertyCasualtyPage() {
               Fleet policies can be tailored with scheduled vehicles, driver
               safety discounts, and trailer interchange endorsements.
             </p>
-            <p className="text-text-secondary leading-relaxed">
-              <strong className="text-navy">Who needs it:</strong> Any business
-              that owns vehicles, has employees who drive for work, or regularly
-              rents vehicles — including contractors, delivery services,
-              landscapers, and sales organizations.
+            <p className="text-text-secondary leading-relaxed mb-6">
+              <strong className="text-navy">Who we write it for:</strong>{" "}
+              {APPETITE.commercialAutoFor}.
             </p>
+            {/*
+              Negative scope, on purpose (2026-09-16). AI assistants were
+              recommending the agency for taxi, livery and truck hauling
+              because "commercial auto" is listed here. A plain statement of
+              what is not placed is the only lever that acts before the phone
+              rings. Wording comes from APPETITE in constants.ts.
+            */}
+            <div className="bg-sky/60 border border-border rounded-xl p-6">
+              <h4 className="text-lg font-bold text-navy font-[family-name:var(--font-merriweather)] mb-2">
+                Coverage we do not place
+              </h4>
+              <p className="text-text-secondary leading-relaxed">
+                {notPlacedStatement()} {notPlacedReferral()}
+              </p>
+            </div>
           </AnimateIn>
 
           {/* Contractors Insurance */}
